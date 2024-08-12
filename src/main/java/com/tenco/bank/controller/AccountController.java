@@ -251,7 +251,11 @@ public class AccountController {
 	 * @return
 	 */
 	@GetMapping("/detail/{accountId}")
-	public String detail(@PathVariable (name = "accountId")Integer accountId, @RequestParam( required = false, name = "type") String type, Model model) {
+	public String detail(@PathVariable (name = "accountId")Integer accountId, 
+			@RequestParam(required = false, name = "type") String type, 
+			@RequestParam(name = "page", defaultValue = "1") int page, 
+			@RequestParam(name = "size", defaultValue = "2") int size, 
+			Model model) {
 		
 		//required = false  => ?type ~ 생략해도 오류 발생 안 하고 null 값을 받아옴.
 		
@@ -268,24 +272,23 @@ public class AccountController {
 			throw new DataDeliveryException("유효하지 않은 접근입니다", HttpStatus.BAD_REQUEST);
 		}
 		
+		// 페이지 개수를 계산하기 위해서 총 페이지의 수를 계산해주어야한다.
+		int totalRecords = accountService.countHistoryByAccountIdAndType(type, accountId);
+		int totalPages = (int) Math.ceil((double)totalRecords / size);
+		
 		Account account = accountService.readAccountById(accountId); // 이거 던져서 응답 받기
-		List<HistoryAccount> historyList = accountService.readHostoryByAccountId(type, accountId);
+		List<HistoryAccount> historyList = accountService.readHostoryByAccountId(type, accountId, page, size);
 		
 		// 데이터 2개 내리기
 		model.addAttribute("account", account);
 		model.addAttribute("historyList", historyList);
 		
+		model.addAttribute("currentPage", page);
+		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("type", type);
+		model.addAttribute("size", size);
+		
+		
 		return "account/detail";
 	}
 }
-
-
-
-
-
-
-
-
-
-
-

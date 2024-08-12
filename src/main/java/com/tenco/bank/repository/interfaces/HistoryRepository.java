@@ -21,10 +21,12 @@ public interface HistoryRepository {
 	public List<History> findAll();
 	
 	//코드 추가 예정 - 모델을 반드시  1:1 엔터티에 매핑을 시킬 필요는 없다. 
-	// 조인 쿼리, 서브쿼리 , 동적 쿼리, type=all, deposit, ..., accountI
-	public List<HistoryAccount> findByAccountIdAndTypeOfHistory(@Param("type") String type, @Param("accountId") Integer accountId); 
+	// 조인 쿼리, 서브쿼리 , 동적 쿼리, type=all, deposit, ..., accountId
+	public List<HistoryAccount> findByAccountIdAndTypeOfHistory(@Param("type") String type, 
+																@Param("accountId") Integer accountId, 
+																@Param("limit") Integer limit, 
+																@Param("offset") Integer offset);
+														
+	public int countByAccountIdAndType(@Param("type")String type, @Param("accountId")Integer accountId); 
 	
 }
-
-
-

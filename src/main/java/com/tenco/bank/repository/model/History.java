@@ -23,6 +23,3 @@ public class History {
 	private Timestamp createdAt;
 	private String receiver;
 }
-
-
-

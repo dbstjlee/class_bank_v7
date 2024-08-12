@@ -18,7 +18,4 @@ public abstract class ValueFormatter {
 		return formatNumber + "원";
 		
 	}
-	
-	
-	
 }

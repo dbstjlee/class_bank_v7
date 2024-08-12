@@ -58,7 +58,4 @@ public class Account extends ValueFormatter {
 			throw new DataDeliveryException(Define.NOT_ACCOUNT_OWNER, HttpStatus.BAD_REQUEST);
 		}
 	}
-	
 }
-
-
