@@ -227,14 +227,7 @@ public class AccountService {
 		List<HistoryAccount> list = new ArrayList<>();
 		list = historyRepository.findByAccountIdAndTypeOfHistory(type, accountId);
 		return list;
-		
-		
 	}
-	
-	
-	
-	
-	
 }
 
 
