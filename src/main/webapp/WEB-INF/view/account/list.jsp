@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
 <!-- header.jsp  -->
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
@@ -7,7 +8,7 @@
 <div class="col-sm-8">
 	<h2>계좌목록(인증)</h2>
 	<h5>Bank App에 오신걸 환영합니다</h5>
-	
+
 	<c:choose>
 		<c:when test="${accountList != null}">
 			<%-- 계좌 존재 : html 주석을 사용하면 오류 발생 (jstl 태그 안에서)  --%>
@@ -19,15 +20,15 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach  var="account"   items="${accountList}">
+					<c:forEach var="account" items="${accountList}">
 						<tr>
-							<td>${account.number}</td>
+							<td><a href="/account/detail/${account.id}?type=all">${account.number}</a></td>
 							<td>${account.balance}</td>
 						</tr>
 					</c:forEach>
-				</tbody>	
+				</tbody>
 			</table>
-					
+
 		</c:when>
 		<c:otherwise>
 			<div class="jumbotron display-4">
@@ -35,8 +36,8 @@
 			</div>
 		</c:otherwise>
 	</c:choose>
-		
-		
+
+
 </div>
 <!-- end of col-sm-8  -->
 </div>
