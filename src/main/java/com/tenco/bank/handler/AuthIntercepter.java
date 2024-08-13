@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpSession;
 @Component // (하나의 클래스를 ) IoC 대상(싱글톤 패턴)
 public class AuthIntercepter implements HandlerInterceptor {
 
-	// preHandle 동작 흐름 (단, 스프링부트 설정 파일 , 설정 클래스에 등록이 되어야 함 : 특정 URL)
+	// preHandle 동작 흐름 (단, 스프링부트 설정 파일, 설정 클래스에 등록이 되어야 함 : 특정 URL)
 	// 컨트롤러 들어 오기 전에 동작함
 	// true --> 컨트롤러 안으로 들여보냄
 	// false --> 컨트롤러 안 으로 못 들어감
@@ -30,7 +30,6 @@ public class AuthIntercepter implements HandlerInterceptor {
 		if(principal == null) {
 			throw new UnAuthorizedException("로그인 먼저 해주세요", HttpStatus.UNAUTHORIZED);
 		}
-		
 		return true; // controller로 들여보내줌
 	}
 	
@@ -52,8 +51,4 @@ public class AuthIntercepter implements HandlerInterceptor {
 		
 		HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
 	}
-	
-	
-	
-	
 }
