@@ -4,8 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.tenco.bank.dto.SignInDTO;
 import com.tenco.bank.dto.SignUpDTO;
@@ -16,7 +19,7 @@ import com.tenco.bank.utils.Define;
 
 import jakarta.servlet.http.HttpSession;
 
-@Controller  
+@RestController // 데이터 내려줌
 @RequestMapping("/user")  
 public class UserController {
 
@@ -102,6 +105,15 @@ public class UserController {
 		session.invalidate(); 
 		return "redirect:/user/sign-in";
 	}
+	
+	@GetMapping("/kakao")
+	public String kakao(@RequestParam(name = "code")String code) {
+		
+		System.out.println("code:" + code);
+		
+		return null;
+	}
+	
 	
 }
 

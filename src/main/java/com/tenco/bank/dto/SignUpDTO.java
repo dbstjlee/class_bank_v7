@@ -16,29 +16,17 @@ import lombok.ToString;
 @Builder
 @ToString
 public class SignUpDTO {
-	
-	private String username; 
-	private String password; 
+
+	private String username;
+	private String password;
 	private String fullname;
 	private MultipartFile mFile;
 	private String originFileName;
 	private String uploadFileName;
-	
-	
-	// 2단계 로직 - User Object 반환 
+
+	// 2단계 로직 - User Object 반환
 	public User toUser() {
-		return User.builder()
-				.username(this.username)
-				.password(this.password)
-				.fullname(this.fullname)
-				.orginFilName(this.originFileName)
-				.uploadFilName(this.uploadFileName)
-				.build();
-	} 
+		return User.builder().username(this.username).password(this.password).fullname(this.fullname)
+				.orginFileName(this.originFileName).uploadFileName(this.uploadFileName).build();
+	}
 }
-
-
-
-
-
-
