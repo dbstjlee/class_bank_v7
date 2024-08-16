@@ -9,39 +9,29 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.tenco.bank.handler.AuthIntercepter;
+import com.tenco.bank.handler.AuthInterceptor;
 
 import lombok.RequiredArgsConstructor;
 
-// 스프링부트 애플리케이션에 등록 - DI 생성해서 낚아 챔
-// WebMvcConfigurer 구현을 하면 설정 파일로 일을 할 수 있음(약속임)
-
+@Configuration   
 @RequiredArgsConstructor
-@Configuration  // 1 개 이상의 bean을 등록할 때 설정
 public class WebMvcConfig implements WebMvcConfigurer {
-
-	@Autowired // DI(객체를 가지고 와서 씀)
-	private final AuthIntercepter authIntercepter;
 	
-	// 생성자 => @RequiredArgsConstructor (생성자 대신 사용 가능)
-//	public WebMvcConfig(AuthIntercepter authIntercepter) {
-//		this.authIntercepter = authIntercepter;
-//	} 
+	@Autowired // DI
+	private final AuthInterceptor authInterceptor;
+	// @RequiredArgsConstructor <-- 생성자 대신 사용 가능
 	
-	// 우리가 만들어 놓은 AuthInterceptor를 등록해야 함.
-	// 보고만 있다가 낚아 챔
+	// 우리가 만들어 놓은 AuthInterceptor 를 등록해야 함. 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(authIntercepter)
-		.addPathPatterns("/account/**")
-		.addPathPatterns("/auth/**");
-		//authIntercepter 가 (낚아채서) 위(DI)에서 동작하게끔 등록시킴
+		registry.addInterceptor(authInterceptor)
+			.addPathPatterns("/account/**")
+			.addPathPatterns("/auth/**");
 	}
 	
-	// 코드 추가
-	//C:\Users\KDP\Desktop\스크린샷\Screenshot_11.png <-- 서버 컴퓨터상의 실제 이미지 경로지만
-	// 프로젝트 상에서 (클라이언트가 HTML 소스로 보이는 경로는) /images/uploads.**
-	
+	// 코드추가 
+	// C:\Users\GGG\Documents\Lightshot\a.png <-- 서버 컴퓨터상에 실제 이미지 경로지만 
+	// 프로젝트 상에서(클라이언트가 HTML 소스로 보이는 경로는) /images/uploads/**
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/images/uploads/**")
@@ -49,11 +39,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	}
 	
 	
-	
-	@Bean // IoC 대상(싱글톤 처리)
+	@Bean // IoC 대상(싱글톤 처리) 
 	PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
-	}
-	
-	
+	}	
 }

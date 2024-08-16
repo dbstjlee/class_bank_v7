@@ -30,8 +30,5 @@ public class CustomErrorController implements ErrorController {
 			// 상세 설정 가능 함 
 			// else if (statusCode == ....)
 		}
-	}
-	
+	}	
 }
-
-
