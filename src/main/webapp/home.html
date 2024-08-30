@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<button type="button">중복 검사</button>
+	<script type="text/javascript">
+	
+	 const btn = document.querySelector("button");
+	 const username = "rr길동";
+	 btn.addEventListener("click", function(){
+	 fetch(`http://localhost:8080/api-user/check-username?username=${useraname}`)
+	 .then(response => response.json()) // 응답을 JSON 형식으로 반환
+	 .then(isUser => {
+		console.log("결과 확인", isUser);
+		btn.innerText = isUser;
+	 })
+	 .catch();
+	 });
+
+	
+	
+	</script>
+</body>
+</html>
